@@ -22,6 +22,7 @@ import com.jason.app.smstoemail.utils.AndrUtils;
 public class SettingsFragment extends NFragment {
 
     private static String mSendEmail;
+    private static String mSenderName;
     private static String mToEmail;
     private static String mSendServer;
     private static String mPassword;
@@ -35,6 +36,7 @@ public class SettingsFragment extends NFragment {
     private TextView mTexPassword;
     private TextView mTexServer;
     private TextView mTexEmail;
+    private TextView mTexName;
     private TextView mTexToEmail;
     private TextView mTexMaxCount;
     private TextView mTexMerger;
@@ -63,6 +65,8 @@ public class SettingsFragment extends NFragment {
         //
         mTexEmail = this.getActivity().findViewById(R.id.sendEmail);
         mTexEmail.setText(mSendEmail);
+        mTexName = this.getActivity().findViewById(R.id.senderName);
+        mTexName.setText(mSenderName);
         mTexToEmail = this.getActivity().findViewById(R.id.toEmail);
         mTexToEmail.setText(mToEmail);
         mTexServer = this.getActivity().findViewById(R.id.sendServer);
@@ -94,6 +98,7 @@ public class SettingsFragment extends NFragment {
             @Override
             public void onClick(View v) {
                 mSendEmail = mTexEmail.getText().toString();
+                mSenderName = mTexName.getText().toString();
                 mToEmail = mTexToEmail.getText().toString();
                 mSendServer = mTexServer.getText().toString();
                 mPassword = mTexPassword.getText().toString();
@@ -113,6 +118,7 @@ public class SettingsFragment extends NFragment {
     public static void setSettings(){
         EmailMager inst = EmailMager.getInstance();
         inst.setSendEmail(mSendEmail);
+        inst.setName(mSenderName);
         inst.setToEmail(mToEmail);
         inst.setSendServer(mSendServer);
         inst.setPassword(mPassword);
@@ -125,6 +131,7 @@ public class SettingsFragment extends NFragment {
     public static void load(Context con) {
         if (AndrUtils.isAssetsConfig(con)) {
             mSendEmail = AndrUtils.getConfigIni(con, "mail", "SendEmail");
+            mSenderName = AndrUtils.getConfigIni(con, "mail", "SenderName");
             mToEmail = AndrUtils.getConfigIni(con, "mail", "ToEmail");
             mSendServer = AndrUtils.getConfigIni(con, "mail", "SendServer");
             mPassword = AndrUtils.getConfigIni(con, "mail", "Password");
@@ -135,6 +142,7 @@ public class SettingsFragment extends NFragment {
         } else {
             SharedPreferences spf = con.getSharedPreferences("settings.xml", Context.MODE_PRIVATE);
             mSendEmail = spf.getString("SendEmail", mSendEmail);
+            mSenderName = spf.getString("SenderName", mSenderName);
             mToEmail = spf.getString("ToEmail", mToEmail);
             mSendServer = spf.getString("SendServer", mSendServer);
             mPassword = spf.getString("Password", mPassword);
@@ -152,6 +160,7 @@ public class SettingsFragment extends NFragment {
             SharedPreferences spf = con.getSharedPreferences("settings.xml", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = spf.edit();
             editor.putString("SendEmail", mSendEmail);
+            editor.putString("SenderName", mSenderName);
             editor.putString("ToEmail", mToEmail);
             editor.putString("SendServer", mSendServer);
             editor.putString("Password", mPassword);

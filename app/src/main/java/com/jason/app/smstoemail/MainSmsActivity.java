@@ -26,7 +26,7 @@ public class MainSmsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
-        checkNormalSms();
+        //checkNormalSms();
         AndrUtils.init(this);
         SmsLocalManager.getInstace().init(this);
         //

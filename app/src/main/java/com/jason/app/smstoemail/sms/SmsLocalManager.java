@@ -63,7 +63,7 @@ public class SmsLocalManager {
                 arrayList.add(new SmsMsg(json));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return arrayList;
     }

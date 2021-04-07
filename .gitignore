@@ -62,3 +62,4 @@ freeline_project_description.json
 .idea/runConfigurations.xml
 .idea/vcs.xml
 app/src/main/assets/settings.json
+/.idea

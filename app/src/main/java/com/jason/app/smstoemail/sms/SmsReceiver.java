@@ -61,6 +61,11 @@ public class SmsReceiver extends BroadcastReceiver {
                 }
             });
             //分类合并,排版
+            StringBuilder sbTitle = new StringBuilder();
+            sbTitle.append("【");
+            sbTitle.append(context.getString(R.string.smsTitle));
+            sbTitle.append(":");
+
             StringBuilder contbuf = null;
             for (SmsMessage msg : messages) {
                 String content = msg.getMessageBody();
@@ -73,7 +78,8 @@ public class SmsReceiver extends BroadcastReceiver {
                 if (contbuf == null) {
                     contbuf = new StringBuilder();
                     StringBuilder sbf = new StringBuilder();
-                    sbf.append(context.getString(R.string.from)).append(from).append("\n");
+                    sbTitle.append(from);
+//                    sbf.append(context.getString(R.string.from)).append(from).append("\n");
 //                    sbf.append(context.getString(R.string.content)).append("\n");
 //                    sbf.append("------------").append(sdf.format(new Date(time))).append("------------\n");
                     sbf.append(content);
@@ -85,9 +91,12 @@ public class SmsReceiver extends BroadcastReceiver {
                     contbuf.append(content);
                 }
             }
+
+            sbTitle.append("】");
             //组装字符串发送
-            Log.e(TAG, "v=\n" + contbuf.toString());
-            boolean isSuc = EmailMager.getInstance().sendMail(context.getString(R.string.smsTitle), contbuf.toString());
+            //Log.e(TAG, "v=\n" + contbuf.toString());
+
+            boolean isSuc = EmailMager.getInstance().sendMail(sbTitle.toString(), contbuf.toString());
             if (isSuc) {
                 Log.i(TAG, "sended");
             } else {

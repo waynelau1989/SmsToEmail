@@ -1,6 +1,7 @@
 package com.jason.app.smstoemail;
 
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.util.Date;
@@ -27,6 +28,7 @@ public class EmailMager {
     private int mMaxRetry = 50;
     private int mRetryTime = 3000;
     //
+    private String mSenderName = "";
     private String mSendEmail = "xxxxx@163.com";
     private String mToEmail="xxxx@163.com";
     private String mPassword = "xxxxx";
@@ -131,7 +133,11 @@ public class EmailMager {
             //
             Session session = Session.getInstance(properties, getAuthenticator());
             MimeMessage mimeMessage = new MimeMessage(session);
-            mimeMessage.setFrom(new InternetAddress(mSendEmail));
+            if (TextUtils.isEmpty(mSenderName)) {
+                mimeMessage.setFrom(new InternetAddress(mSendEmail));
+            } else {
+                mimeMessage.setFrom(new InternetAddress(mSendEmail, mSenderName));
+            }
             InternetAddress[] addresses = new InternetAddress[]{new InternetAddress(mToEmail)};
             mimeMessage.setRecipients(Message.RecipientType.TO, addresses);
             mimeMessage.setSubject(title);
@@ -205,6 +211,10 @@ public class EmailMager {
     public void setToEmail(String mToEmail) {
         this.mToEmail = mToEmail;
     }
+
+    public String getName() { return mSenderName; }
+
+    public void setName(String name) { this.mSenderName = name; }
 
     public String getPassword() {
         return mPassword;

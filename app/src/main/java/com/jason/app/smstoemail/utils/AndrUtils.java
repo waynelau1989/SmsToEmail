@@ -232,7 +232,7 @@ public class AndrUtils {
         try {
             return con.getAssets().open("settings.json") != null;
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return false;
     }

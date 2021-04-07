@@ -3,6 +3,7 @@
     <string name="settings">设置</string>
     <string name="sendServer">发送服务器</string>
     <string name="sendEmail">发件邮箱</string>
+    <string name="senderName">发送者名字</string>
     <string name="password">密码</string>
     <string name="maxRetry">重试次数</string>
     <string name="retryTimeInterval">重试间隔</string>
